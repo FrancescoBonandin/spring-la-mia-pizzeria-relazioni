@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
-<head th:replace="Frags :: head(${title})" >
+<head th:replace="pizza/Frags :: head(${title})" >
 	
 </head>
 <body data-bs-theme="dark">
 	
-	<th:block th:replace="Frags :: header()"></th:block>
+	<th:block th:replace="pizza/Frags :: header()"></th:block>
 	
 	
 	<div class="container">
@@ -36,7 +36,7 @@
 								
 							<input class="mb-2 form-control" type="text" id="nome" name="nome" placeholder="nome" th:field="*{nome}">
 							
-							<th:block th:replace="Frags::errorDiv('nome')"></th:block>
+							<th:block th:replace="pizza/Frags::errorDiv('nome')"></th:block>
 							
 						</div>
 						
@@ -68,7 +68,7 @@
 							
 							<input class="mb-2 form-control" type="number" id="prezzo" name="prezzo" placeholder="prezzo" step="0.01" th:field="*{prezzo}">
 							
-							<th:block th:replace="Frags::errorDiv('prezzo')"></th:block>
+							<th:block th:replace="pizza/Frags::errorDiv('prezzo')"></th:block>
 							
 						</div>
 						
@@ -86,7 +86,7 @@
 				
 			</div>
 			
-					<div class="text-center my-4" th:insert="Frags :: button('/' , 'home')" ></div>
+					<div class="text-center my-4" th:insert="pizza/Frags :: button('/' , 'home')" ></div>
 			
 		</div>
 		

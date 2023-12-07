@@ -19,7 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import jakarta.validation.Valid;
 
 @Controller
-public class MainController {
+public class PizzaController {
 	
 	@Autowired
 	private PizzaService pizzaService;
@@ -34,7 +34,7 @@ public class MainController {
 		model.addAttribute("pizzas",pizzas);
 		model.addAttribute("q", q == null ? "" : q);
 		
-		return "index";
+		return "pizza/index";
 		
 	}
 	
@@ -47,7 +47,7 @@ public class MainController {
 		model.addAttribute("pizza",pizza);
 		model.addAttribute("title", "Create");
 		
-		return "form";
+		return "pizza/form";
 	}
 	
 	@PostMapping("/pizza/create")
@@ -64,7 +64,7 @@ public class MainController {
 			
 			System.out.println(bindingResult);
 			model.addAttribute("pizza", pizza);
-			return "form";
+			return "pizza/form";
 		}
 		
 		else {
@@ -79,7 +79,7 @@ public class MainController {
 				
 				bindingResult.addError(new FieldError("pizza", "nome", pizza.getNome(), false, null, null, "Nome must be unique"));
 				model.addAttribute("pizza", pizza);
-				return "form";
+				return "pizza/form";
 			}
 			
 			return "redirect:/";
@@ -94,7 +94,7 @@ public class MainController {
 		
 		model.addAttribute("pizza",pizza);
 		
-		return "show";
+		return "pizza/show";
 		
 	}
 	
@@ -106,7 +106,7 @@ public class MainController {
 		model.addAttribute("pizza",pizza);
 		model.addAttribute("title", "Edit");
 		
-		return "form";
+		return "pizza/form";
 	}
 	
 	@PostMapping("/pizza/edit/{id}")
@@ -126,7 +126,7 @@ public class MainController {
 			model.addAttribute("pizza", pizza);
 			model.addAttribute("title", "edit");
 			
-			return "form";
+			return "pizza/form";
 		}
 		
 		else {
@@ -146,7 +146,7 @@ public class MainController {
 				model.addAttribute("pizza", pizza);
 				model.addAttribute("title", "edit");
 				
-				return "form";
+				return "pizza/form";
 			}
 			
 			return "redirect:/";

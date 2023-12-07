@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head th:replace="Frags :: head('MyPizzeria')" >
+<head th:replace="pizza/Frags :: head('MyPizzeria')" >
 	
 </head>
 
 <body  data-bs-theme="dark">
 	
 	
-	<th:block th:replace="Frags :: header()"></th:block>
+	<th:block th:replace="pizza/Frags :: header()"></th:block>
 	
 	<main>
 		
 		
 		
-		<div class="container">
+		<div class="container-xl">
 			
 			<form>
 				
@@ -52,9 +52,10 @@
 						
 						<div class="col" >[[${pizza.getPrezzo()}]] €</div>
 						
-						<div class="col" th:insert="Frags :: button('/pizza/'+ ${pizza.getId()} , 'show')" ></div>
 						
-						<div class="col" th:insert="Frags :: button('/pizza/edit/'+ ${pizza.getId()} , 'edit')" ></div>
+						<div class="col" th:insert="pizza/Frags :: button('/pizza/'+ ${pizza.getId()} , 'show')" ></div>
+						
+						<div class="col" th:insert="pizza/Frags :: button('/pizza/edit/'+ ${pizza.getId()} , 'edit')" ></div>
 						
 						<form class="col" method="POST" th:action="@{'/pizza/delete/{id}'  (id=${pizza.id})}">
 							
@@ -70,7 +71,7 @@
 
 				<div th:if="${deletedPizza != null} " class="alert alert-danger">[[${deletedPizza.nome}]] have been deleted successfully! </div>
 				
-				<div class="col-auto" th:insert="Frags :: button('/pizza/create' , 'Create')" ></div>
+				<div class="col-auto" th:insert="pizza/Frags :: button('/pizza/create' , 'Create')" ></div>
 				
 			</div>
 			
