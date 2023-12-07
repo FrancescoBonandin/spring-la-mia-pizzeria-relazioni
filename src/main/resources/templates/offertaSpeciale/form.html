@@ -46,7 +46,7 @@
 								Data Di Inizio
 							</label>
 							
-							<input class="mb-2 form-control" type="date" id="dataDiInizio" name="dataDiInizio"  th:field="*{dataDiInizio}" th:value="*{dataDiFine}" th:format="'dd/MM/yy'" >
+							<input class="mb-2 form-control" type="date" id="dataDiInizio" name="dataDiInizio"  th:value="*{dataDiInizio}"  >
 							
 							<th:block th:replace="pizza/Frags::errorDiv('dataDiInizio')"></th:block>
 						</div>
@@ -57,7 +57,7 @@
 								Data Di Fine
 							</label>
 							
-							<input class="mb-2 form-control" type="date" id="dataDiFine" name="dataDiFine" th:field="*{dataDiFine}"  th:value="*{dataDiFine}" th:format="'dd/MM/yy'" >
+							<input class="mb-2 form-control" type="date" id="dataDiFine" name="dataDiFine"  th:value="*{dataDiFine}"  >
 							
 							<th:block th:replace="pizza/Frags::errorDiv('dataDiFine')"></th:block>
 							
