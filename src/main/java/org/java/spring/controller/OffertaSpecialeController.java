@@ -30,9 +30,9 @@ private OffertaSpecialeService offertaSpecialeService ;
 
 private PizzaService pizzaService;
 	
-	@GetMapping("/pizza/{id}/offertaSpeciale/create")
+	@GetMapping("/pizza/{pizza_id}/offertaSpeciale/create")
 	
-	public String routeCreate(Model model, @PathVariable int id) {
+	public String routeCreate(Model model, @PathVariable int pizza_id) {
 		
 		OffertaSpeciale offertaSpeciale = new OffertaSpeciale();
 		
@@ -42,13 +42,13 @@ private PizzaService pizzaService;
 		return "offertaSpeciale/form";
 	}
 	
-	@PostMapping("/pizza/{id}/offertaSpeciale/create")
+	@PostMapping("/pizza/{pizza_id}/offertaSpeciale/create")
 	public String storeOffertaSpeciale(
 			Model model,
 			@Valid @ModelAttribute OffertaSpeciale offertaSpeciale, 
-			BindingResult bindingResult, @PathVariable int id) {
+			BindingResult bindingResult, @PathVariable int pizza_id) {
 		
-		Pizza pizza = pizzaService.findById(id);
+		Pizza pizza = pizzaService.findById(pizza_id);
 		
 		offertaSpeciale.setPizza(pizza);
 //		System.out.println("offertaSpeciale:\n" + offertaSpeciale);
@@ -74,12 +74,12 @@ private PizzaService pizzaService;
 			
 			catch(Exception e) {
 				
-				bindingResult.addError(new FieldError("offertaSpeciale", "nome", offertaSpeciale.getTitolo(), false, null, null, "Nome must be unique"));
+				bindingResult.addError(new FieldError("offertaSpeciale", "titolo", offertaSpeciale.getTitolo(), false, null, null, "Nome must be unique"));
 				model.addAttribute("offertaSpeciale", offertaSpeciale);
 				return "offertaSpeciale/form";
 			}
 			
-			return "redirect:/";
+			return "redirect:/pizza/"+pizza_id;
 		}
 	}
 	
@@ -109,6 +109,7 @@ private PizzaService pizzaService;
 		if (bindingResult.hasErrors()) {
 			
 			System.out.println(bindingResult);
+			System.out.println(model);
 			model.addAttribute("offertaSpeciale", offertaSpeciale);
 			model.addAttribute("title", "Edit");
 			
@@ -128,20 +129,20 @@ private PizzaService pizzaService;
 			
 			catch(Exception e) {
 				
-				bindingResult.addError(new FieldError("offertaSpeciale", "nome", offertaSpeciale.getTitolo(), false, null, null, "Nome must be unique"));
+				bindingResult.addError(new FieldError("offertaSpeciale", "titolo", offertaSpeciale.getTitolo(), false, null, null, "Nome must be unique"));
 				model.addAttribute("offertaSpeciale", offertaSpeciale);
 				model.addAttribute("title", "Edit");
 				
 				return "offertaSpeciale/form";
 			}
 			
-			return "redirect:/";
+			return "redirect:/pizza/"+ pizza_id;
 		}
 		
 	}
 	
-	@PostMapping("/offertaSpeciale/delete/{id}")
-	public String routeDelete( RedirectAttributes redirectAttribute,  @PathVariable int id) {
+	@PostMapping("/pizza/{pizza_id}/offertaSpeciale/delete/{id}")
+	public String routeDelete( RedirectAttributes redirectAttribute, @PathVariable int pizza_id, @PathVariable int id) {
 		
 		OffertaSpeciale offertaSpeciale = offertaSpecialeService.findById(id);
 		
@@ -151,7 +152,7 @@ private PizzaService pizzaService;
 		
 //		System.out.println(offertaSpeciale.getTitolo());
 		
-		return "redirect:/";
+		return "redirect:/pizza/"+ pizza_id;
 	}
 
 }
