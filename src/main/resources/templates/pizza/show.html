@@ -43,7 +43,14 @@
 										
 										<th:block th:replace="pizza/Frags::button('/pizza/'+${pizza.id} +'/offertaSpeciale/edit/' + ${offerta.id} , 'edit')"></th:block>
 									
+										<form class="col" method="POST" th:action="@{/pizza/{pizza_id}/offertaSpeciale/delete/{id}  (pizza_id=${pizza.id}, id=${offerta.id})}">
+								
+											<input class="btn btn-danger" type="submit" value="delete">
+											
+										</form>
+										
 									</div>
+									
 									
 									
 									

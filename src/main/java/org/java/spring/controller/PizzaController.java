@@ -2,7 +2,11 @@ package org.java.spring.controller;
 
 import java.util.List;
 
+import org.java.spring.pojo.Ingrediente;
+import org.java.spring.pojo.OffertaSpeciale;
 import org.java.spring.pojo.Pizza;
+import org.java.spring.serv.IngredienteService;
+import org.java.spring.serv.OffertaSpecialeService;
 import org.java.spring.serv.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +27,12 @@ public class PizzaController {
 	
 	@Autowired
 	private PizzaService pizzaService;
+	
+	@Autowired
+	private OffertaSpecialeService offertaSpecialeService;
+	
+	@Autowired
+	private IngredienteService ingredienteService;
 
 	@GetMapping("/")
 	public String routeIndex(Model model, @RequestParam(required=false) String q ) {
@@ -43,8 +53,10 @@ public class PizzaController {
 	public String routeCreate(Model model) {
 		
 		Pizza pizza = new Pizza();
+		List <Ingrediente> ingredienti=ingredienteService.findAll();
 		
 		model.addAttribute("pizza",pizza);
+		model.addAttribute("ingredienti", ingredienti);
 		model.addAttribute("title", "Create");
 		
 		return "pizza/form";
@@ -102,8 +114,10 @@ public class PizzaController {
 	public String routeEdit(Model model, @PathVariable int id) {
 		
 		Pizza pizza = pizzaService.findById(id);
+		List <Ingrediente> ingredienti=ingredienteService.findAll();
 		
 		model.addAttribute("pizza",pizza);
+		model.addAttribute("ingredienti", ingredienti);
 		model.addAttribute("title", "Edit");
 		
 		return "pizza/form";
@@ -158,6 +172,12 @@ public class PizzaController {
 	public String routeDelete( RedirectAttributes redirectAttribute,  @PathVariable int id) {
 		
 		Pizza pizza = pizzaService.findById(id);
+		
+// NON necessario		
+//		pizza.clearIngredienti();
+//		pizzaService.save(pizza);
+		
+		pizza.getOffertaSpeciale().forEach(offertaSpecialeService::delete);
 		
 		pizzaService.delete(pizza);
 		

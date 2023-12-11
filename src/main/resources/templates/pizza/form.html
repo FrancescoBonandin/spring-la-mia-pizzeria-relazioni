@@ -72,6 +72,17 @@
 							
 						</div>
 						
+						<div th:each="ingrediente : ${ingredienti}" th:object="${ingrediente}">
+			
+							<label class="form-label" th:for="'ingrediente-'+ *{id}" >
+								[[*{nome}]]
+							</label>
+							
+							<input type="checkbox" th:id="'ingrediente-'+ *{id}" th:value="*{id}" th:field="${pizza.ingredienti}">
+				
+							
+						</div>
+						
 						<div class=" mb-4 row justify-content-evenly">
 							
 							<input class="btn btn-success col-auto" type="submit" th:value="${title}">

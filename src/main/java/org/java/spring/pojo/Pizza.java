@@ -1,5 +1,6 @@
 package org.java.spring.pojo;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.hibernate.validator.constraints.Length;
@@ -9,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -42,24 +44,21 @@ public class Pizza {
 	@OneToMany(mappedBy = "pizza")
 	public List<OffertaSpeciale> offertaSpeciale;
 	
+	@ManyToMany
+	public List<Ingrediente> ingredienti;
+	
 	public Pizza() {}
 	
-	public Pizza( String nome, String descrizione, Float prezzo, String fotoUrl) {
+	public Pizza( String nome, String descrizione, Float prezzo, String fotoUrl, Ingrediente...ingredienti) {
 		
 		setNome(nome);
 		setDescrizione(descrizione);
 		setPrezzo((float)prezzo);
 		setFotoUrl(fotoUrl);
+		setIngredienti(ingredienti);
 		
 	}
 
-	public List<OffertaSpeciale> getOffertaSpeciale() {
-		return offertaSpeciale;
-	}
-
-	public void setOffertaSpeciale(List<OffertaSpeciale> offertaSpeciale) {
-		this.offertaSpeciale = offertaSpeciale;
-	}
 
 	public Integer getId() {
 		return id;
@@ -101,6 +100,31 @@ public class Pizza {
 		this.prezzo = prezzo;
 	}
 	
+	
+	public List<OffertaSpeciale> getOffertaSpeciale() {
+		return offertaSpeciale;
+	}
+	
+	public void setOffertaSpeciale(List<OffertaSpeciale> offertaSpeciale) {
+		this.offertaSpeciale = offertaSpeciale;
+	}
+	
+	public List<Ingrediente> getIngredienti() {
+		return ingredienti;
+	}
+
+	public void setIngredienti(List<Ingrediente> ingredienti) {
+		this.ingredienti = ingredienti;
+	}
+	
+	public void setIngredienti(Ingrediente... ingredienti) {
+		setIngredienti(Arrays.asList(ingredienti));
+	}
+	
+	public void clearIngredienti() {
+		getIngredienti().clear();
+	}
+
 	@Override
 	public String toString() {
 		
