@@ -165,13 +165,14 @@ public class IngredienteController {
 		
 		Ingrediente ingrediente = ingredienteService.findById(id);
 		
-		
 		//prendi tutte le pizze associate all ingrediente e svuota
-		//la lista dei loro ingredienti(droppa la relazione)
-		ingrediente.getPizzas().forEach(pizza->pizza.clearIngredienti());
+		//la lista dei loro ingredienti(droppa tutte le relazioni)
+		//ingrediente.getPizzas().forEach(pizza->pizza.clearIngredienti());
 		
+		//prendi tutte le pizze associate all ingrediente e rimuovi
+		//dalla lista dei loro ingredienti il singolo ingrediente(droppa la relazione con ingrediente)
+		ingrediente.getPizzas().forEach(pizza->pizza.getIngredienti().remove(ingrediente));
 		
-	
 		ingrediente.clearPizzas();
 		ingredienteService.save(ingrediente);
 		

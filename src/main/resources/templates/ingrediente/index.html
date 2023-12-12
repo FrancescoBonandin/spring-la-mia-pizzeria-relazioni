@@ -64,7 +64,7 @@
 					
 				</ul>
 
-				<div th:if="${deletedPizza != null} " class="alert alert-danger">[[${deletedPizza.nome}]] have been deleted successfully! </div>
+				<div th:if="${deletedIngrediente != null} " class="alert alert-danger">[[${deletedIngrediente.nome}]] have been deleted successfully! </div>
 				
 				<div class="col-auto" th:insert="pizza/Frags :: button('/ingrediente/create' , 'Create')" ></div>
 				
